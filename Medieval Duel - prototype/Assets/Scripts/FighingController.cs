@@ -47,7 +47,7 @@ public class FighingController : MonoBehaviour {
     private void Attack()
     {
         //Attack allowed only when player is not running 
-        if (Input.GetMouseButton(0) && !state.isAttacking && !state.isRunning && stats.currentStamina>0)
+        if (Input.GetMouseButton(0) && !state.isAttacking && !state.isRunning && !state.isRolling && stats.currentStamina>0)
         {
             state.SetAttacking();
             StartCoroutine(AttackRoutine());

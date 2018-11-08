@@ -239,6 +239,7 @@
     <Compile Include="Assets\Scripts\FighingController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerStates.cs" />
+    <Compile Include="Assets\Scripts\RollController.cs" />
     <Compile Include="Assets\Scripts\StatsController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,6 +8,7 @@ public class PlayerStates : MonoBehaviour
     public bool isWalking; //is character walking?
     public bool isAttacking; //is character attacking?
     public bool isBlocking; //is character using shield to block?
+    public bool isRolling; //is character rolling?
 
     public void SetRunning(){
             isRunning = true;
@@ -34,6 +35,12 @@ public class PlayerStates : MonoBehaviour
     {
         isBlocking = true;
         isAttacking = false;
+    }
+    public void SetRolling()
+    {
+        isRolling = true;
+        isWalking = false;
+        isRunning = false;
     }
 
 }

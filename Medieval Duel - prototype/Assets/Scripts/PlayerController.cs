@@ -38,8 +38,12 @@ public class PlayerController : MonoBehaviour {
         {
             CheckIfPlayerJump();
         }
-        MovePlayer();
-        RotatePlayer();
+
+        if (!state.isRolling) //make sure player is not rolling
+        {
+            MovePlayer();
+            RotatePlayer();
+        }
     }
 
     private void CheckIfPlayerSprint(){
@@ -110,6 +114,7 @@ public class PlayerController : MonoBehaviour {
         anim.SetBool("isWalking", state.isWalking);
         anim.SetBool("isAttacking", state.isAttacking);
         anim.SetBool("isBlocking", state.isBlocking);
+        anim.SetBool("isRolling", state.isRolling);
     }
 
 }
