@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class StatsController : MonoBehaviour {
-
+    private PlayerStates state;
     public Slider healthBar;
     public Slider staminaBar;
     public float hp;
@@ -15,6 +15,7 @@ public class StatsController : MonoBehaviour {
     public float staminaCooldown;
 
 	void Start () {
+        state = GetComponent<PlayerStates>();
         canRegenerateStamina = false;
         currentHp = hp;
         currentStamina = stamina;
@@ -22,7 +23,11 @@ public class StatsController : MonoBehaviour {
 	}
 	
 	void Update () {
-        RegenerateStamina();
+        //Regenerate stamina only if player is alive
+        if (state.isAlive)
+        {
+            RegenerateStamina();
+        }
 	}
 
     public void WasteStamina(float staminaValue)
@@ -72,6 +77,7 @@ public class StatsController : MonoBehaviour {
     private void Die()
     {
         currentHp = 0;
+        state.SetPlayerDied();
         Debug.Log("You died");
     }
 }

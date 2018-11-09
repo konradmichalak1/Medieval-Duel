@@ -9,10 +9,29 @@ public class PlayerStates : MonoBehaviour
     public bool isAttacking; //is character attacking?
     public bool isBlocking; //is character using shield to block?
     public bool isRolling; //is character rolling?
+    public bool lightAttack; 
+    public bool heavyAttack;
+    public bool isAlive; //is player alive?
+
+    public void SetPlayerDied()
+    {
+        isRunning = false;
+        isWalking = false;
+        isAttacking = false;
+        isBlocking = false;
+        isRolling = false;
+        lightAttack = false;
+        heavyAttack = false;
+        isAlive = false;
+    }
 
     public void SetRunning(){
-            isRunning = true;
-            isWalking = false;
+        isRunning = true;
+        isWalking = false;
+        isAttacking = false;
+        lightAttack = false;
+        heavyAttack = false;
+        isBlocking = false;
     }
 
     public void SetWalking(){
@@ -41,6 +60,7 @@ public class PlayerStates : MonoBehaviour
         isRolling = true;
         isWalking = false;
         isRunning = false;
+        isAttacking = false;
     }
 
 }

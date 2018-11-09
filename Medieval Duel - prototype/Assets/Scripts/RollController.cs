@@ -20,8 +20,12 @@ public class RollController : MonoBehaviour {
     }
 	
 	void Update () {
-        CheckIfPlayerRoll();
-        MovePlayer();
+        //First check if player is alive
+        if (state.isAlive) 
+        {
+            CheckIfPlayerRoll();
+            MovePlayer();
+        }
 	}
     private void CheckIfPlayerRoll()
     {
@@ -42,6 +46,10 @@ public class RollController : MonoBehaviour {
     {
         if (state.isRolling)
         {
+            state.isBlocking = false;
+            state.isAttacking = false;
+            state.lightAttack = false;
+            state.heavyAttack = false;
             controller.Move(moveDirection * Time.deltaTime); //moving the player
             transform.rotation = Quaternion.Euler(0f, mainCamera.rotation.eulerAngles.y, 0f); //rotating player into camera rotation
             Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));

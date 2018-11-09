@@ -22,11 +22,15 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
         state = GetComponent<PlayerStates>();
         controller = GetComponent<CharacterController>();
+        state.isAlive = true;
 	}
 	void Update () {
-        PlayerMovement();
+        if (state.isAlive)
+        {
+            PlayerMovement();
+        }
         SetAnimatorValues();
-	}
+    }
 
     private void PlayerMovement()
     {
@@ -115,6 +119,9 @@ public class PlayerController : MonoBehaviour {
         anim.SetBool("isAttacking", state.isAttacking);
         anim.SetBool("isBlocking", state.isBlocking);
         anim.SetBool("isRolling", state.isRolling);
+        anim.SetBool("lightAttack",state.lightAttack);
+        anim.SetBool("heavyAttack", state.heavyAttack);
+        anim.SetBool("isAlive", state.isAlive);
     }
 
 }
