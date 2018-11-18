@@ -43,7 +43,7 @@ public class StatsController : MonoBehaviour {
     {
         if (currentStamina < stamina && canRegenerateStamina)
         {
-            currentStamina += 1;
+            currentStamina += 5;
         }
         staminaBar.value = CalculateStamina();
     }
