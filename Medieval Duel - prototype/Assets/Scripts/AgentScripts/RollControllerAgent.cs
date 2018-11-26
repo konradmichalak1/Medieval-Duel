@@ -5,7 +5,7 @@ using UnityEngine;
 public class RollControllerAgent : MonoBehaviour {
 
     public CharacterController controller; //reference to player object 
-    private PlayerStates state;
+    private States state;
     private StatsController stats;
     private Vector3 moveDirection;
     public Transform mainCamera; //object that rotate instead of player model
@@ -15,7 +15,7 @@ public class RollControllerAgent : MonoBehaviour {
 
     void Start () {
         controller = GetComponent<CharacterController>();
-        state = GetComponent<PlayerStates>();
+        state = GetComponent<States>();
         stats = GetComponent<StatsController>();
     }
 	

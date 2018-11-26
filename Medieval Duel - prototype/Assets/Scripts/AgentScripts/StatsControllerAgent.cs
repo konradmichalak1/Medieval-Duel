@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class StatsControllerAgent : MonoBehaviour {
-    private PlayerStates state;
+    private States state;
     public Slider healthBar;
     public Slider staminaBar;
     public float hp;
@@ -15,7 +15,7 @@ public class StatsControllerAgent : MonoBehaviour {
     public float staminaCooldown;
 
 	void Start () {
-        state = GetComponent<PlayerStates>();
+        state = GetComponent<States>();
         canRegenerateStamina = false;
         currentHp = hp;
         currentStamina = stamina;

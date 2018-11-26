@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerControllerAgent : Agent {
 
-    private PlayerStates state;
+    private States state;
     private float walkSpeed = 5f, runSpeed = 7.0f;
     private StatsController stats;
     public float rollSpeed = 6.0f; //roll and rotate during roll speed
@@ -39,7 +39,7 @@ public class PlayerControllerAgent : Agent {
     void Start ()
     {
         rBody = GetComponent<Rigidbody>();
-        state = GetComponent<PlayerStates>();
+        state = GetComponent<States>();
         controller = GetComponent<CharacterController>();
         rayPer = GetComponent<RayPerception>();
         state.isAlive = true;

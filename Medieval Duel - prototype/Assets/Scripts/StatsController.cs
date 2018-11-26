@@ -4,32 +4,44 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class StatsController : MonoBehaviour {
-    private PlayerStates state;
+    /// <summary> Current object states such as: isWalking, isAttacking </summary>
+    private States state;
+    /// <summary> Health bar from user interface - shows current HP </summary>
     public Slider healthBar;
+    /// <summary> Stamina bar from user interface - shows current SP </summary>
     public Slider staminaBar;
-    public float hp;
+    /// <summary> Maximum health points value </summary>
+    public float maxHealthPoints = 100;
+     /// <summary> Maximum stamina points value </summary>
+    public float maxStaminaPoints = 100;
+    /// <summary> Current hp value </summary>
     public float currentHp;
-    public float stamina;
+    /// <summary> Current sp value </summary>
     public float currentStamina;
+    /// <summary> If true, stamina is regenerating. </summary>
     private bool canRegenerateStamina;
-    public float staminaCooldown;
+    /// <summary> Time needed, to start regenerate stamina. </summary>
+    public float staminaCooldown = 1.0f;
 
 	void Start () {
-        state = GetComponent<PlayerStates>();
+        //Initialize values
+        state = GetComponent<States>();
         canRegenerateStamina = false;
-        currentHp = hp;
-        currentStamina = stamina;
+        currentHp = maxHealthPoints;
+        currentStamina = maxStaminaPoints;
         healthBar.value = CalculateHealth();
 	}
 	
 	void Update () {
-        //Regenerate stamina only if player is alive
+        //Regenerate stamina only if object is alive
         if (state.isAlive)
         {
             RegenerateStamina();
         }
 	}
 
+    /// <summary>Decreases stamina points by the value of the argument </summary>
+    /// <param name="staminaValue">How many stamina points subtract?</param>
     public void WasteStamina(float staminaValue)
     {
         StopAllCoroutines();
@@ -39,31 +51,36 @@ public class StatsController : MonoBehaviour {
         StartCoroutine(StaminaRoutine());
     }
 
+    /// <summary>Regenerate stamina points </summary>
     public void RegenerateStamina()
     {
-        if (currentStamina < stamina && canRegenerateStamina)
+        if (currentStamina < maxStaminaPoints && canRegenerateStamina)
         {
             currentStamina += 5;
         }
+        if (currentStamina > maxStaminaPoints) currentStamina = maxStaminaPoints;
         staminaBar.value = CalculateStamina();
     }
-
+    /// <summary> Cooldown stamina regenerate - prevents regenerating earlier than staminaCooldown </summary>
     IEnumerator StaminaRoutine()
     {
         yield return new WaitForSeconds(staminaCooldown);
         canRegenerateStamina = true;
     }
 
+    /// <summary> Calculates percentage value of current stamina points </summary>
     private float CalculateStamina()
     {
-        return currentStamina / stamina;
+        return currentStamina / maxStaminaPoints;
     }
 
+    /// <summary> Calculates percentage value of current health points </summary>
     private float CalculateHealth()
     {
-        return currentHp / hp;
+        return currentHp / maxHealthPoints;
     }
 
+    /// <summary> Decreases health points of this object </summary>
     public void DealDamage(float damageValue)
     {
         currentHp -= damageValue;
@@ -73,11 +90,10 @@ public class StatsController : MonoBehaviour {
             Die();
         }
     }
-
+    /// <summary> Set object state to 'Dead' </summary>
     private void Die()
     {
         currentHp = 0;
         state.SetPlayerDied();
-        Debug.Log("You died");
     }
 }

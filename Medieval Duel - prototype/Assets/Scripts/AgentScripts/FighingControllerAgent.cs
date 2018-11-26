@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FighingControllerAgent : MonoBehaviour {
 
-    private PlayerStates state;
+    private States state;
     private StatsController stats;
 
     public Collider[] attackHitboxes;
@@ -19,7 +19,7 @@ public class FighingControllerAgent : MonoBehaviour {
     public float lightAttackStaminaCost;
     public float heavyAttackStaminaCost;
     void Start () {
-        state = GetComponent<PlayerStates>();
+        state = GetComponent<States>();
         stats = GetComponent<StatsController>();
         state.isAttacking = false;
         hitted = false;
