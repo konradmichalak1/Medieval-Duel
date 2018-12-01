@@ -100,6 +100,8 @@ public class States : MonoBehaviour
     {
         isBlocking = true;
         isAttacking = false;
+        lightAttack = false;
+        heavyAttack = false;
     }
     /// <summary>
     /// Set appropriate states to make object rolling

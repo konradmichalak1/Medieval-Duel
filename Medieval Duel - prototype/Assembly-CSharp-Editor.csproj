@@ -60,11 +60,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ml-agents\UnitySDK\Assets\ML-Agents\Editor\AgentEditor.cs" />
-    <Compile Include="Assets\ml-agents\UnitySDK\Assets\ML-Agents\Editor\BrainEditor.cs" />
-    <Compile Include="Assets\ml-agents\UnitySDK\Assets\ML-Agents\Editor\ResetParameterDrawer.cs" />
-    <Compile Include="Assets\ml-agents\UnitySDK\Assets\ML-Agents\Editor\Tests\EditModeTestActionMasker.cs" />
-    <Compile Include="Assets\ml-agents\UnitySDK\Assets\ML-Agents\Editor\Tests\MLAgentsEditModeTest.cs" />
+    <Compile Include="Assets\ML-Agents\Editor\AgentEditor.cs" />
+    <Compile Include="Assets\ML-Agents\Editor\BrainEditor.cs" />
+    <Compile Include="Assets\ML-Agents\Editor\ResetParameterDrawer.cs" />
+    <Compile Include="Assets\ML-Agents\Editor\Tests\EditModeTestActionMasker.cs" />
+    <Compile Include="Assets\ML-Agents\Editor\Tests\MLAgentsEditModeTest.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -318,22 +318,22 @@
       <HintPath>E:/Programy/Unity 2018/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics">
-      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ml-agents/UnitySDK/Assets/ML-Agents/Plugins/System.Numerics.dll</HintPath>
+      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/Plugins/System.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple">
-      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ml-agents/UnitySDK/Assets/ML-Agents/Plugins/System.ValueTuple.dll</HintPath>
+      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/Plugins/System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="TensorFlowSharp">
-      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ml-agents/UnitySDK/Assets/ML-Agents/Plugins/Computer/TensorFlowSharp.dll</HintPath>
+      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/Plugins/Computer/TensorFlowSharp.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf">
-      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ml-agents/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/Google.Protobuf.dll</HintPath>
+      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/Plugins/ProtoBuffer/Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="Grpc.Core">
-      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ml-agents/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/Grpc.Core.dll</HintPath>
+      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/Plugins/ProtoBuffer/Grpc.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Interactive.Async">
-      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ml-agents/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/System.Interactive.Async.dll</HintPath>
+      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/Plugins/ProtoBuffer/System.Interactive.Async.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/Konrad/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>

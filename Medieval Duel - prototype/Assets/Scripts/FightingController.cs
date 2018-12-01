@@ -48,9 +48,9 @@ public abstract class FightingController : MonoBehaviour {
         if (state.isAlive)
         {
             //each frame, executes fighting methods
+            Block();
             LightAttack();
             HeavyAttack();
-            Block();
         }
     }
 

@@ -12,8 +12,9 @@ namespace Assets.Scripts
         {   //Checks if object is alive
             if (state.isAlive)
             {
-               // CharacterMovement();
+                //CharacterMovement();
             }
+            state.isWalking = false;
             SetAnimatorValues();
         }
     }

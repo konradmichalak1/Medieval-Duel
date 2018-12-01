@@ -7,46 +7,50 @@ namespace Assets.Scripts.EnemyScripts
 {
     public class AgentFightingController : FightingController
     {
+        /// <summary> Reference to enemy object, for agent enemy is Player or other agent. </summary>
+        public GameObject enemy;
+        public bool doAction = true;
+
+
         protected override void LightAttack()
         {
-            //Należy odkomentować po zaimplementowaniu warunków ataku i bloku dla agenta
-            //isLightAttacking = true;
-            //isLightAttacking = SetLightAttacking();
+            isLightAttacking = SetLightAttacking();
             base.LightAttack();
         }
 
         protected override void HeavyAttack()
         {
-            //isHeavyAttacking = SetHeavyAttacking();
+            isHeavyAttacking = SetHeavyAttacking();
             base.HeavyAttack();
         }
+
         protected override void Block()
         {
-            //isBlocking = SetBlocking();
-            isBlocking = true; //tymczasowo by testować blokowanie
+            isBlocking = SetBlocking();
             base.Block();
         }
 
         /// <summary>
-        /// DO ZAIMPLEMENTOWANIA - WARUNKI WYWOŁANIA ATAKÓW I BLOKOWANIA DLA AGENTÓW
+        /// Condition for light attack calling
         /// </summary>
         private bool SetLightAttacking()
         {
-            return true;
+            return !enemy.GetComponent<States>().isBlocking ? true : false;
         }
         /// <summary>
-        /// DO ZAIMPLEMENTOWANIA - WARUNKI WYWOŁANIA ATAKÓW I BLOKOWANIA DLA AGENTÓW
+        /// Condition for heavy attack calling
         /// </summary>
         private bool SetHeavyAttacking()
         {
-            return true;
+            return enemy.GetComponent<States>().isBlocking ? true : false;
         }
         /// <summary>
-        /// DO ZAIMPLEMENTOWANIA - WARUNKI WYWOŁANIA ATAKÓW I BLOKOWANIA DLA AGENTÓW
+        /// Condition for shield block calling
         /// </summary>
         private bool SetBlocking()
         {
-            return true;
+            return enemy.GetComponent<States>().lightAttack ? true : false;
         }
+
     }
 }
