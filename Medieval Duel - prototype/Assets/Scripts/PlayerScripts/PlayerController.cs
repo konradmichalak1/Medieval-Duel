@@ -8,7 +8,7 @@ namespace Assets.Scripts
 {
     public class PlayerController : MoveController
     {
-        protected override void Update()
+        protected void Update()
         {
             //Checks if object is alive
             if (state.isAlive)

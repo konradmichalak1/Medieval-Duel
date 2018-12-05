@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour {
     public bool focusOnEnemy; //is camera focused on enemy?
     public Transform enemy;
     public Transform player;
-
+    public bool isAgent;
     private float distance = 6.0f;
     private float currentX = 0.0f;
     private float currentY = 30.0f;
@@ -28,26 +28,29 @@ public class CameraController : MonoBehaviour {
     }
     private void Update()
     {
-        if (Input.GetButtonDown("Focus") && !focusOnEnemy)
+        if (!isAgent)
         {
-            focusOnEnemy = true;
-            lookAt = enemy;
+            if (Input.GetButtonDown("Focus") && !focusOnEnemy)
+            {
+                focusOnEnemy = true;
+                lookAt = enemy;
 
-        }
-        else if (Input.GetButtonDown("Focus") && focusOnEnemy)
-        {
-            focusOnEnemy = false;
-            lookAt = player;
-        }
+            }
+            else if (Input.GetButtonDown("Focus") && focusOnEnemy)
+            {
+                focusOnEnemy = false;
+                lookAt = player;
+            }
 
-        if (!focusOnEnemy)
-        {
-            currentX += Input.GetAxis("Mouse X") * sensitivityX;
-            currentY += Input.GetAxis("Mouse Y") * -sensitivityY;
-            currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
+            if (!focusOnEnemy)
+            {
+                currentX += Input.GetAxis("Mouse X") * sensitivityX;
+                currentY += Input.GetAxis("Mouse Y") * -sensitivityY;
+                currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
 
-            distance += Input.GetAxis("Mouse ScrollWheel") * -sensitivityScroll;
-            distance = Mathf.Clamp(distance, minDistance, maxDistance);
+                distance += Input.GetAxis("Mouse ScrollWheel") * -sensitivityScroll;
+                distance = Mathf.Clamp(distance, minDistance, maxDistance);
+            }
         }
     }
     void LateUpdate () {

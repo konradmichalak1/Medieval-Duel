@@ -12,19 +12,19 @@ namespace Assets.Scripts.EnemyScripts
         public bool doAction = true;
 
 
-        protected override void LightAttack()
+        public override void LightAttack()
         {
             isLightAttacking = SetLightAttacking();
             base.LightAttack();
         }
 
-        protected override void HeavyAttack()
+        public override void HeavyAttack()
         {
             isHeavyAttacking = SetHeavyAttacking();
             base.HeavyAttack();
         }
 
-        protected override void Block()
+        public override void Block()
         {
             isBlocking = SetBlocking();
             base.Block();

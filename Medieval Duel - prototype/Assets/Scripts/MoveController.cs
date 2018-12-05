@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MoveController : MonoBehaviour {
+public class MoveController : MonoBehaviour {
 
     /// <summary> Current object states such as: isWalking, isAttacking </summary>
-    protected States state;
+    public States state;
     /// <summary> Current object stats such us: health, stamina </summary>
     public StatsController stats;
     /// <summary> Movement speed </summary>
-    private float walkSpeed = 2.5f, runSpeed = 7.0f;
+    public float walkSpeed = 2.5f, runSpeed = 7.0f;
     /// <summary> Character current movement speed </summary>
     public float moveSpeed = 3f;
     /// <summary> Character jump force </summary>
@@ -38,7 +38,7 @@ public abstract class MoveController : MonoBehaviour {
         stats = GetComponent<StatsController>();
         state.isAlive = true;
 	}
-    protected abstract void Update();
+    
 
     protected void CharacterMovement()
     {
@@ -108,14 +108,17 @@ public abstract class MoveController : MonoBehaviour {
     }
     private void Jump(float[] action)
     {
-        //implementation of jump
-        if (controller.isGrounded && stats.currentStamina >= 25)
+        if (action.Length == 3)
         {
-            moveDirection.y = 0f;
-            if (action[2] > 0)
+            //implementation of jump
+            if (controller.isGrounded && stats.currentStamina >= 25)
             {
-                moveDirection.y = jumpForce;
-                stats.WasteStamina(25);
+                moveDirection.y = 0f;
+                if (action[2] > 0)
+                {
+                    moveDirection.y = jumpForce;
+                    stats.WasteStamina(25);
+                }
             }
         }
     }
@@ -150,14 +153,9 @@ public abstract class MoveController : MonoBehaviour {
     {
         if (action[0] != 0 || action[1] != 0)
         {
-            if (moveSpeed > walkSpeed)
-            {
-                rotateSpeed = runSpeed;
-            }
-            else
-            {
-                rotateSpeed = walkSpeed * 2;
-            }
+
+            rotateSpeed = walkSpeed * 2;
+
             transform.rotation = Quaternion.Euler(0f, mainCamera.rotation.eulerAngles.y, 0f); //rotating player into camera rotation
             Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
             playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
