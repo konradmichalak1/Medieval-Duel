@@ -69,8 +69,6 @@ namespace Assets.Scripts
         public override void AgentReset()
         {
             int which = rnd.Next(0, 4);
-            Target.position = new Vector3(targetPosition.x + rnd.Next(-4, 0), 0.5f, targetPosition.z + rnd.Next(-4, 0));
-
             mvC.transform.position = new Vector3(startPostion.x, startPostion.y, startPostion.z - 2);
             rBody.angularVelocity = Vector3.zero;
             rBody.velocity = Vector3.zero;
@@ -178,6 +176,20 @@ namespace Assets.Scripts
                     academy.resetParameters["high_fence"],
                     fences[0].transform.localScale.z);
             }
+
+            if(changeFlag != 5)
+            {
+                Target.position = new Vector3(targetPosition.x + rnd.Next(-4, 0), 0.5f, targetPosition.z + rnd.Next(-4, 0));
+            }
+            if(changeFlag == 5)
+            {
+                previousAgentHp = 100;
+                previousEnemyHp = 100;
+                mvC.stats.currentHp = 100;
+                mvCEnemy.stats.currentHp = 100;
+                mvC.state.isAlive = true;
+                mvCEnemy.state.isAlive = true;
+            }
         }
 
         public void AgentActionInDiffrentScenes(float[] vectorAction)
@@ -244,10 +256,15 @@ namespace Assets.Scripts
                     afc.Block();
 
                 if (previousAgentHp > mvC.stats.currentHp)
+                {
                     AddReward(-0.1f);
-
+                    previousAgentHp = mvC.stats.currentHp;
+                }
                 if (previousEnemyHp > tsc.currentHp)
+                {
                     AddReward(0.1f);
+                    previousEnemyHp = mvCEnemy.stats.currentHp;
+                }
 
                 if(!mvC.state.isAlive)
                 {
@@ -260,6 +277,7 @@ namespace Assets.Scripts
                     AddReward(1.0f);
                     Done();
                 }
+                Target.position = mvCEnemy.transform.position;
             }
         }
 
