@@ -55,7 +55,7 @@ public abstract class FightingController : MonoBehaviour {
     }
 
     /// <summary> Makes the object do block with shield </summary>
-    protected virtual void Block()
+    public virtual void Block()
     {
         // if inheriting object invokes block, doesn't running and doesn't attacking, then set its state to blocking
         if (!state.isImpact && stats.currentStamina > 0 && isBlocking && !state.isRunning && !state.isAttacking && !state.isRolling)
@@ -68,7 +68,7 @@ public abstract class FightingController : MonoBehaviour {
         }
     }
     /// <summary> Makes the object do light attack </summary>
-    protected virtual void LightAttack()
+    public virtual void LightAttack()
     {
         //if inheriting object invokes light attack, and can attack
         if (isLightAttacking && CanAttack())
@@ -87,7 +87,7 @@ public abstract class FightingController : MonoBehaviour {
         }
     }
     /// <summary> Makes the object do heavy attack </summary>
-    protected virtual void HeavyAttack()
+    public virtual void HeavyAttack()
     {
         //if inheriting object invokes light attack, and can attack
         if (isHeavyAttacking && CanAttack())
