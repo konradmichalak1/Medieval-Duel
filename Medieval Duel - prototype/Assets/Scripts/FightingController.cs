@@ -30,7 +30,7 @@ public abstract class FightingController : MonoBehaviour {
     /// <summary> Light attack cooldown [in seconds] </summary>
     public float lightAttackCooldown = 0.6f;
     /// <summary> Heavy attack cooldown [in seconds] </summary>
-    public float heavyAttackCooldown = 1.4f;
+    public float heavyAttackCooldown = 1.6f;
     /// <summary> Describes if inheriting object invokes a function </summary>
     protected bool isBlocking, isLightAttacking, isHeavyAttacking;
 
@@ -128,9 +128,9 @@ public abstract class FightingController : MonoBehaviour {
     /// <returns></returns>
     IEnumerator HeavyAttackRoutine()
     {
-        yield return new WaitForSeconds(heavyAttackCooldown/2);
+        yield return new WaitForSeconds(heavyAttackCooldown/4);
         hitted = false; //after half of animation, damage can be dealt to an enemy
-        yield return new WaitForSeconds(heavyAttackCooldown/2);
+        yield return new WaitForSeconds(heavyAttackCooldown*0.75f);
         state.isAttacking = false;
         state.heavyAttack = false;
         hitted = false;

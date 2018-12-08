@@ -42,14 +42,9 @@ public abstract class MoveController : MonoBehaviour {
 
     protected void CharacterMovement()
     {
-        Sprint();
         CheckCharacterDirection();
-
-        //Moving is allowed when player is not attacking
-        if (state.isRunning)
-        {
-            Jump();
-        }
+        Jump();
+        Sprint();
 
         if (!state.isRolling) //make sure player is not rolling
         {
@@ -74,7 +69,8 @@ public abstract class MoveController : MonoBehaviour {
             state.SetRunning();
             moveSpeed = runSpeed;
         }
-        else {
+        else
+        {
             state.SetWalking();
             moveSpeed = walkSpeed;
         }
@@ -98,7 +94,7 @@ public abstract class MoveController : MonoBehaviour {
     {
         //implementation of jump
         if (controller.isGrounded && state.isRunning)
-        { 
+        {
             moveDirection.y = 0f;
             if (Input.GetButtonDown("Jump"))
             {

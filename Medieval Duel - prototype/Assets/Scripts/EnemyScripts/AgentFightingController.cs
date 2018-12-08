@@ -14,19 +14,22 @@ namespace Assets.Scripts.EnemyScripts
 
         protected override void LightAttack()
         {
-            isLightAttacking = SetLightAttacking();
+            isLightAttacking = true;
+            //isLightAttacking = SetLightAttacking();
             base.LightAttack();
         }
 
         protected override void HeavyAttack()
         {
-            isHeavyAttacking = SetHeavyAttacking();
+           // isHeavyAttacking = true;
+            //isHeavyAttacking = SetHeavyAttacking();
             base.HeavyAttack();
         }
 
         protected override void Block()
         {
-            isBlocking = SetBlocking();
+            
+            //isBlocking = SetBlocking();
             base.Block();
         }
 
