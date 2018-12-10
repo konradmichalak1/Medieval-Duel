@@ -126,7 +126,7 @@ namespace Assets.Scripts
             }
 
             previousDistance = distanceToTarget;
-            if (changeFlag != 1)
+            if (changeFlag != 1 || changeFlag != 2)
                 mvC.CharacterMovement(vectorAction);
             else
                 mvC.CharacterMovementWithoutLefRight(vectorAction);
@@ -163,7 +163,7 @@ namespace Assets.Scripts
 
         public void AgentResetInDiffrentScenes()
         {
-            if (changeFlag == 1)
+            if (changeFlag == 1 || changeFlag == 2)
             {
                 foreach (var x in obstacles)
                 {
