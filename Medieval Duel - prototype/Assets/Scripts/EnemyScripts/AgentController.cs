@@ -126,7 +126,10 @@ namespace Assets.Scripts
             }
 
             previousDistance = distanceToTarget;
-            mvC.CharacterMovement(vectorAction);
+            if (changeFlag != 1)
+                mvC.CharacterMovement(vectorAction);
+            else
+                mvC.CharacterMovementWithoutLefRight(vectorAction);
             mvC.SetAnimatorValues(vectorAction);
         }
 

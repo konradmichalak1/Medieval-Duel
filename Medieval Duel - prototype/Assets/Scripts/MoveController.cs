@@ -67,6 +67,15 @@ public class MoveController : MonoBehaviour {
         RotateCharacter(action);
     }
 
+    public void CharacterMovementWithoutLefRight(float[] action)
+    {
+        Sprint();
+        CheckCharacterDirectionWithoutLeftRight(action);
+        Jump(action);
+        MoveCharacter();
+        RotateCharacterWithoutLefRight(action);
+    }
+
     /// <summary>  </summary>
     protected void Sprint(){
         if (Input.GetButton("Sprint"))
@@ -90,6 +99,14 @@ public class MoveController : MonoBehaviour {
     {
         yStore = moveDirection.y;
         moveDirection = (transform.forward * action[1]) + (transform.right * action[0]); //moving on blue and red axis in world space
+        moveDirection = moveDirection.normalized * moveSpeed; //calculating the normalized value od moveDirection basing on setted moveSpeed
+        moveDirection.y = yStore; //setting the y value of moveDirection
+    }
+
+    private void CheckCharacterDirectionWithoutLeftRight(float[] action)
+    {
+        yStore = moveDirection.y;
+        moveDirection = (transform.forward * action[1]); //moving on blue and red axis in world space
         moveDirection = moveDirection.normalized * moveSpeed; //calculating the normalized value od moveDirection basing on setted moveSpeed
         moveDirection.y = yStore; //setting the y value of moveDirection
     }
@@ -166,6 +183,23 @@ public class MoveController : MonoBehaviour {
         }
     }
 
+
+    private void RotateCharacterWithoutLefRight(float[] action)
+    {
+        if (action[0] != 0)
+        {
+            Vector3 rotateDir = Vector3.zero;
+            rotateDir = transform.up * Mathf.Clamp(action[0], -1f, 1f);
+
+            transform.Rotate(rotateDir, Time.deltaTime * 150f);
+        }
+        else
+        {
+            state.SetStaying();
+        }
+    }
+   
+
     protected void SetAnimatorValues(){
         anim.SetBool("isGrounded", controller.isGrounded);
         anim.SetBool("isRunning", state.isRunning);
@@ -182,7 +216,6 @@ public class MoveController : MonoBehaviour {
     public void SetAnimatorValues(float[] action)
     {
         anim.SetBool("isGrounded", controller.isGrounded);
-        anim.SetFloat("Speed", (Mathf.Abs(action[1]) + Mathf.Abs(action[0])));
         anim.SetBool("isRunning", state.isRunning);
         anim.SetBool("isWalking", state.isWalking);
         anim.SetBool("isAttacking", state.isAttacking);
