@@ -7,6 +7,18 @@ namespace Assets.Scripts.PlayerScripts
 {
     public class PlayerFightingController:FightingController
     {
+        protected override void Update()
+        {       
+            //checks if object is alive
+            if (state.isAlive)
+            {
+                //each frame, executes fighting methods
+                Block();
+                HeavyAttack();
+                LightAttack();
+            }
+            base.Update();
+        }
 
         public override void LightAttack()
         {

@@ -119,6 +119,7 @@ public class States : MonoBehaviour
 
     public void SetImpact()
     {
+        Debug.Log("Impact");
         isImpact = true;
         isWalking = false;
         isAttacking = false;
@@ -127,6 +128,7 @@ public class States : MonoBehaviour
     }
     public void SetShieldImpact()
     {
+        Debug.Log("Shield Impact");
         isShieldImpact = true;
         isRunning = false;
         isAttacking = false;

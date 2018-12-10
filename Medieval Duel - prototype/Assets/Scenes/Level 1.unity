@@ -339,7 +339,7 @@ MonoBehaviour:
   healthBar: {fileID: 1246098880}
   staminaBar: {fileID: 281934845}
   maxHealthPoints: 500
-  maxStaminaPoints: 100
+  maxStaminaPoints: 15
   currentHp: 0
   currentStamina: 0
   staminaCooldown: 2
@@ -2915,8 +2915,9 @@ MonoBehaviour:
   lightAttackStaminaCost: 25
   heavyAttackStaminaCost: 40
   lightAttackCooldown: 0.6
-  heavyAttackCooldown: 1.4
+  heavyAttackCooldown: 1.7
   enemy: {fileID: 33296829}
+  doAction: 1
 --- !u!114 &793021999
 MonoBehaviour:
   m_ObjectHideFlags: 0

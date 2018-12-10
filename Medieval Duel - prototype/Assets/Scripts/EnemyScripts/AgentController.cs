@@ -250,22 +250,24 @@ namespace Assets.Scripts
 
             if (changeFlag == 5)
             {
-                if (vectorAction[2] > 0)
-                    afc.LightAttack();
-                else
-                    afc.HeavyAttack();
-
                 if (vectorAction[3] > 0)
                     afc.Block();
 
+                if (vectorAction[2] > 0.5)
+                {
+                    afc.LightAttack();
+                }
+                else if (vectorAction[2] < -0.5)
+                    afc.HeavyAttack();
+
                 if (previousAgentHp > mvC.stats.currentHp)
                 {
-                    AddReward(-0.1f);
+                    AddReward(-0.01f * (previousAgentHp - mvC.stats.currentHp));
                     previousAgentHp = mvC.stats.currentHp;
                 }
                 if (previousEnemyHp > tsc.currentHp)
                 {
-                    AddReward(0.1f);
+                    AddReward(0.01f * (previousEnemyHp - tsc.currentHp));
                     previousEnemyHp = mvCEnemy.stats.currentHp;
                 }
 

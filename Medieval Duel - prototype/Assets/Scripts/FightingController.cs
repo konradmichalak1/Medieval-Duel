@@ -30,7 +30,7 @@ public abstract class FightingController : MonoBehaviour {
     /// <summary> Light attack cooldown [in seconds] </summary>
     public float lightAttackCooldown = 0.6f;
     /// <summary> Heavy attack cooldown [in seconds] </summary>
-    public float heavyAttackCooldown = 1.4f;
+    public float heavyAttackCooldown = 1.6f;
     /// <summary> Describes if inheriting object invokes a function </summary>
     protected bool isBlocking, isLightAttacking, isHeavyAttacking;
 
@@ -44,26 +44,21 @@ public abstract class FightingController : MonoBehaviour {
 	
     //Code that is executed each frame
 	protected virtual void Update () {
-        //checks if object is alive
-        if (state.isAlive)
-        {
-            //each frame, executes fighting methods
-            Block();
-            LightAttack();
-            HeavyAttack();
-        }
+
     }
 
     /// <summary> Makes the object do block with shield </summary>
     public virtual void Block()
     {
         // if inheriting object invokes block, doesn't running and doesn't attacking, then set its state to blocking
-        if (!state.isImpact && stats.currentStamina > 0 && isBlocking && !state.isRunning && !state.isAttacking && !state.isRolling)
+        if (isBlocking && !state.isImpact && stats.currentStamina > 0 && !state.isRunning && !state.isAttacking && !state.isRolling)
         {
+            Debug.Log("Blok");
             state.SetBlocking();
         }
         else
         {
+            isBlocking = false;
             state.isBlocking = false;
         }
     }
@@ -73,6 +68,7 @@ public abstract class FightingController : MonoBehaviour {
         //if inheriting object invokes light attack, and can attack
         if (isLightAttacking && CanAttack())
         {
+            Debug.Log("Lekki atak");
             actualDamage = lightAttackDamage ; //set light attack damage
             state.SetAttacking();
             state.lightAttack = true;
@@ -92,6 +88,7 @@ public abstract class FightingController : MonoBehaviour {
         //if inheriting object invokes light attack, and can attack
         if (isHeavyAttacking && CanAttack())
         {
+            Debug.Log("Ciężki atak");
             actualDamage = heavyAttackDamage; //set heavy attack damage
             state.SetAttacking();
             state.heavyAttack = true;
@@ -121,6 +118,7 @@ public abstract class FightingController : MonoBehaviour {
         yield return new WaitForSeconds(lightAttackCooldown*0.75f);
         state.isAttacking = false;
         state.lightAttack = false;
+        isLightAttacking = false;
         hitted = false;
     }
 
@@ -128,11 +126,12 @@ public abstract class FightingController : MonoBehaviour {
     /// <returns></returns>
     IEnumerator HeavyAttackRoutine()
     {
-        yield return new WaitForSeconds(heavyAttackCooldown/2);
+        yield return new WaitForSeconds(heavyAttackCooldown/4);
         hitted = false; //after half of animation, damage can be dealt to an enemy
-        yield return new WaitForSeconds(heavyAttackCooldown/2);
+        yield return new WaitForSeconds(heavyAttackCooldown*0.75f);
         state.isAttacking = false;
         state.heavyAttack = false;
+        isHeavyAttacking = false;
         hitted = false;
     }
 

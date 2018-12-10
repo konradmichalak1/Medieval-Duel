@@ -97,14 +97,7 @@
     <Compile Include="Assets\ML-Agents\Scripts\RpcCommunicator.cs" />
     <Compile Include="Assets\ML-Agents\Scripts\SocketCommunicator.cs" />
     <Compile Include="Assets\ML-Agents\Scripts\UnityAgentsException.cs" />
-    <Compile Include="Assets\Scripts\AgentScripts\CameraControllerAgent.cs" />
-    <Compile Include="Assets\Scripts\AgentScripts\FighingControllerAgent.cs" />
-    <Compile Include="Assets\Scripts\AgentScripts\PlayerControllerAgent.cs" />
-    <Compile Include="Assets\Scripts\AgentScripts\PlayerControllerWithJumpAgent.cs" />
-    <Compile Include="Assets\Scripts\AgentScripts\PlayerStatesAgent.cs" />
     <Compile Include="Assets\Scripts\AgentScripts\RayPerception.cs" />
-    <Compile Include="Assets\Scripts\AgentScripts\RollControllerAgent.cs" />
-    <Compile Include="Assets\Scripts\AgentScripts\StatsControllerAgent.cs" />
     <Compile Include="Assets\Scripts\AgentScripts\WarriorAcademy.cs" />
     <Compile Include="Assets\Scripts\EnemyScripts\AgentController.cs" />
     <Compile Include="Assets\Scripts\EnemyScripts\AgentFightingController.cs" />
