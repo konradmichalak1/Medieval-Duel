@@ -9,8 +9,11 @@ namespace Assets.Scripts.EnemyScripts
     {
         /// <summary> Reference to enemy object, for agent enemy is Player or other agent. </summary>
         public GameObject enemy;
-        public bool doAction = true;
 
+        protected override void Update()
+        {  
+            base.Update();
+        }
 
         public override void LightAttack()
         {
@@ -21,14 +24,14 @@ namespace Assets.Scripts.EnemyScripts
 
         public override void HeavyAttack()
         {
-           // isHeavyAttacking = true;
+            isHeavyAttacking = true;
             //isHeavyAttacking = SetHeavyAttacking();
             base.HeavyAttack();
         }
 
         public override void Block()
         {
-            
+            isBlocking = true;
             //isBlocking = SetBlocking();
             base.Block();
         }
@@ -38,7 +41,7 @@ namespace Assets.Scripts.EnemyScripts
         /// </summary>
         private bool SetLightAttacking()
         {
-            return !enemy.GetComponent<States>().isBlocking ? true : false;
+            return true;
         }
         /// <summary>
         /// Condition for heavy attack calling

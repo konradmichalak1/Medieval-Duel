@@ -178,7 +178,6 @@ public class MoveController : MonoBehaviour {
     public void SetAnimatorValues(float[] action)
     {
         anim.SetBool("isGrounded", controller.isGrounded);
-        anim.SetFloat("Speed", (Mathf.Abs(action[1]) + Mathf.Abs(action[0])));
         anim.SetBool("isRunning", state.isRunning);
         anim.SetBool("isWalking", state.isWalking);
         anim.SetBool("isAttacking", state.isAttacking);
