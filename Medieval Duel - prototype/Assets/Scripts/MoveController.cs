@@ -62,15 +62,6 @@ public class MoveController : MonoBehaviour {
         RotateCharacter(action);
     }
 
-    public void CharacterMovementWithoutLefRight(float[] action)
-    {
-        Sprint();
-        CheckCharacterDirectionWithoutLeftRight(action);
-        Jump(action);
-        MoveCharacter();
-        RotateCharacterWithoutLefRight(action);
-    }
-
     /// <summary>  </summary>
     protected void Sprint(){
         if (Input.GetButton("Sprint"))
@@ -94,15 +85,7 @@ public class MoveController : MonoBehaviour {
     private void CheckCharacterDirection(float[] action)
     {
         yStore = moveDirection.y;
-        moveDirection = (transform.forward * action[1]) + (transform.right * action[0]); //moving on blue and red axis in world space
-        moveDirection = moveDirection.normalized * moveSpeed; //calculating the normalized value od moveDirection basing on setted moveSpeed
-        moveDirection.y = yStore; //setting the y value of moveDirection
-    }
-
-    private void CheckCharacterDirectionWithoutLeftRight(float[] action)
-    {
-        yStore = moveDirection.y;
-        moveDirection = (transform.forward * action[1]); //moving on blue and red axis in world space
+        moveDirection = (transform.forward * action[1]) + (transform.right * action[2]); //moving on blue and red axis in world space
         moveDirection = moveDirection.normalized * moveSpeed; //calculating the normalized value od moveDirection basing on setted moveSpeed
         moveDirection.y = yStore; //setting the y value of moveDirection
     }
@@ -121,13 +104,13 @@ public class MoveController : MonoBehaviour {
     }
     private void Jump(float[] action)
     {
-        if (action.Length == 3)
+        if (action.Length == 4)
         {
             //implementation of jump
             if (controller.isGrounded && stats.currentStamina >= 25)
             {
                 moveDirection.y = 0f;
-                if (action[2] > 0)
+                if (action[3] > 0.5)
                 {
                     moveDirection.y = jumpForce;
                     stats.WasteStamina(25);
@@ -162,25 +145,8 @@ public class MoveController : MonoBehaviour {
             state.SetStaying();
         }
     }
+
     private void RotateCharacter(float[] action)
-    {
-        if (action[0] != 0 || action[1] != 0)
-        {
-
-            rotateSpeed = walkSpeed * 2;
-
-            transform.rotation = Quaternion.Euler(0f, mainCamera.rotation.eulerAngles.y, 0f); //rotating player into camera rotation
-            Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
-            playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
-        }
-        else
-        {
-            state.SetStaying();
-        }
-    }
-
-
-    private void RotateCharacterWithoutLefRight(float[] action)
     {
         if (action[0] != 0)
         {

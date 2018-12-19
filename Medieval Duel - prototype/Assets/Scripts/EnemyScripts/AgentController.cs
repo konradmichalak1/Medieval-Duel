@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 using UnityEngine;
 namespace Assets.Scripts
 {
-    class AgentController : Agent
+    public class AgentController : Agent
     {
         System.Random rnd = new System.Random();
 
-        MoveController mvC;
-        MoveController mvCEnemy;
+        public MoveController mvC;
+        public MoveController mvCEnemy;
         RayPerception rayPer;
         Rigidbody rBody;
         public Transform Target;
@@ -30,26 +30,35 @@ namespace Assets.Scripts
         public Brain jumpBrain;
         public Brain walkBrain;
 
-        private float previousDistance = float.MaxValue;
-        private float distanceToTarget = float.MaxValue;
+        public float previousDistance = float.MaxValue;
+        public float distanceToTarget = float.MaxValue;
 
         public Vector3 relativePosition;
         const float rayDistance = 10f;
         float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
 
-        string[] detectableObjects = new string[] { "Enemy", "Wall", "Fence", "Player" };
+        string[] detectableObjects = new string[] { "Enemy", "Wall", "Fence", "Player", "Obstacle" };
         float fencesStartPositionY;
         float obstaclesStartPositionX;
         float obstaclesStartPositionY;
 
         public Vector3 startPostion;
+        public Quaternion startRotation;
         public Vector3 targetPosition;
                
         public WarriorAcademy academy;
-        public int changeFlag = -1;
+        
         public float previousAgentHp;
         public float previousEnemyHp;
-        
+        public float localY;
+        public float lookAtRotation;
+
+        public string mode;
+        private const string walkMode = "WalkMode";
+        private const string fightMode = "FightMode";
+        private const string jumpMode = "JumpMode";
+        private const string walkAndJumpModeJumper = "WalkAndJumpModeJumper";
+        private const string walkAndJumpModeWalker = "WalkAndJumpModeWalker";
 
         void Start()
         {
@@ -59,6 +68,7 @@ namespace Assets.Scripts
             academy = FindObjectOfType<WarriorAcademy>();
 
             startPostion = this.transform.position;
+            startRotation = this.transform.rotation;
             targetPosition = Target.position;
 
             mvC.moveSpeed = 7.0f;
@@ -69,7 +79,8 @@ namespace Assets.Scripts
         public override void AgentReset()
         {
             int which = rnd.Next(0, 4);
-            mvC.transform.position = new Vector3(startPostion.x, startPostion.y, startPostion.z - 2);
+            mvC.transform.position = new Vector3(startPostion.x, startPostion.y, startPostion.z);
+            mvC.transform.rotation = startRotation;
             rBody.angularVelocity = Vector3.zero;
             rBody.velocity = Vector3.zero;
             mvC.stats.currentStamina = 100;
@@ -84,7 +95,9 @@ namespace Assets.Scripts
                                               Target.position);
             relativePosition = Target.position - this.transform.position;
 
-            AddVectorObs(rayPer.Perceive(rayDistance, rayAngles, detectableObjects, -0.6f, -0.6f));
+            lookAtRotation = Vector3.Angle(mvC.transform.forward, relativePosition);
+
+            AddVectorObs(rayPer.Perceive(rayDistance, rayAngles, detectableObjects, -0.6f, 0));
             AddVectorObs(relativePosition.x / float.MaxValue);
             AddVectorObs(relativePosition.z / float.MaxValue);
             AddVectorObs(distanceToTarget / float.MaxValue);
@@ -92,14 +105,19 @@ namespace Assets.Scripts
             AddVectorObs(mvC.transform.position.x / float.MaxValue);
             AddVectorObs(mvC.transform.position.z / float.MaxValue);
             AddVectorObs(mvC.transform.position.y / float.MaxValue);
+            if (mode != fightMode)
+                AddVectorObs(mvC.transform.localRotation.y);
+            else
+                AddVectorObs(lookAtRotation / 180);
             AddVectorObs(Target.position.x / float.MaxValue);
             AddVectorObs(Target.position.z / float.MaxValue);
             AddVectorObs(mvC.stats.currentStamina / 100);
 
-            if(changeFlag == 5)
+            if(mode == fightMode)
             {
                 AddVectorObs(mvC.stats.currentHp / 100);
                 AddVectorObs(mvCEnemy.stats.currentHp / 100);
+
                 if (mvCEnemy.state.isAttacking)
                     AddVectorObs(1);
                 else
@@ -109,49 +127,118 @@ namespace Assets.Scripts
                     AddVectorObs(1);
                 else
                     AddVectorObs(0);
+
+                if (mvCEnemy.state.lightAttack)
+                    AddVectorObs(1);
+                else
+                    AddVectorObs(0);
+
+                if (mvCEnemy.state.heavyAttack)
+                    AddVectorObs(1);
+                else
+                    AddVectorObs(0);
+
+                if (mvCEnemy.state.isImpact)
+                    AddVectorObs(1);
+                else
+                    AddVectorObs(0);
+
+                if (mvCEnemy.state.isShieldImpact)
+                    AddVectorObs(1);
+                else
+                    AddVectorObs(0);
+
+
+                if (mvC.state.isAttacking)
+                    AddVectorObs(1);
+                else
+                    AddVectorObs(0);
+
+                if (mvC.state.lightAttack)
+                    AddVectorObs(1);
+                else
+                    AddVectorObs(0);
+
+                if (mvC.state.heavyAttack)
+                    AddVectorObs(1);
+                else
+                    AddVectorObs(0);
+
+                if (mvC.state.isImpact)
+                    AddVectorObs(1);
+                else
+                    AddVectorObs(0);
+
+                if (mvC.state.isShieldImpact)
+                    AddVectorObs(1);
+                else
+                    AddVectorObs(0);
             }
         }
 
         public override void AgentAction(float[] vectorAction, string textAction)
         {
             AgentActionInDiffrentScenes(vectorAction);
-
-            int i = this.GetStepCount();
-            if (i % 60 == 0)
-                AddReward(-0.05f);
-
-            if (Math.Round(previousDistance, 1) > Math.Round(distanceToTarget, 1))
+            localY = this.mvC.transform.localRotation.y;
+            
+            AddReward(-0.05f);
+            if (mode != fightMode)
             {
-                AddReward(0.05f);
-            }
+                if (Math.Round(previousDistance, 1) > Math.Round(distanceToTarget, 1))
+                {
+                    AddReward(0.1f);
+                    if (this.mvC.transform.localRotation.y > -0.5f && this.mvC.transform.localRotation.y < -0.5f)
+                        AddReward(0.1f);
+                }
 
-            previousDistance = distanceToTarget;
-            if (changeFlag != 1 || changeFlag != 2)
-                mvC.CharacterMovement(vectorAction);
+                if (Math.Round(previousDistance, 1) < Math.Round(distanceToTarget, 1))
+                {
+                    AddReward(-0.1f);
+                    if (this.mvC.transform.localRotation.y < -0.5f || this.mvC.transform.localRotation.y > 0.5f)
+                        AddReward(-0.1f);
+                }
+
+
+                if (this.mvC.transform.position.z < startPostion.z - 2.5)
+                {
+                    AddReward(-1.0f);
+                    Done();
+                }
+            }
             else
-                mvC.CharacterMovementWithoutLefRight(vectorAction);
+            {
+                if (Math.Round(previousDistance, 1) > Math.Round(distanceToTarget, 1))
+                {
+                    AddReward(0.1f);
+                    if (lookAtRotation < 90)
+                        AddReward(0.1f);
+                }
+            }
+            previousDistance = distanceToTarget;
+
+            mvC.CharacterMovement(vectorAction);
             mvC.SetAnimatorValues(vectorAction);
         }
 
         public void PrepareScene()
         {
-            if (changeFlag == 0)
+            if (mode == jumpMode)
                 fencesStartPositionY = fences[0].transform.position.y;
 
-            if (changeFlag == 1)
+            if (mode == walkMode)
             {
                 obstaclesStartPositionX = obstacles[0].transform.position.x;
-                obstaclesStartPositionY = obstacles[0].transform.position.y;
+                obstaclesStartPositionY = obstacles[0].transform.position.y - 5;
             }
 
-            if (changeFlag == 2)
+            if (mode == walkAndJumpModeWalker)
             {
                 obstaclesStartPositionX = obstacles[0].transform.position.x;
-                obstaclesStartPositionY = obstacles[0].transform.position.y;
+                obstaclesStartPositionY = obstacles[0].transform.position.y - 5;
                 fencesStartPositionY = fences[0].transform.position.y;
             }
 
-            if (changeFlag == 5)
+            if (mode == fightMode)
             {
                 afc = GetComponent<AgentFightingController>();
                 tfc = Target.GetComponent<AgentFightingController>();
@@ -163,16 +250,39 @@ namespace Assets.Scripts
 
         public void AgentResetInDiffrentScenes()
         {
-            if (changeFlag == 1 || changeFlag == 2)
+            if (mode == walkMode || mode == walkAndJumpModeWalker)
             {
                 foreach (var x in obstacles)
                 {
-                    int pom = rnd.Next(-4, 4);
+                    int pom = rnd.Next(-3, 3);
                     x.transform.position = new Vector3(obstaclesStartPositionX + pom, obstaclesStartPositionY, x.transform.position.z);
+                }
+                if (academy.resetParameters["walls"] == 0)
+                {
+                    obstacles[3].transform.position = new Vector3(obstacles[3].transform.position.x, obstaclesStartPositionY + 5, obstacles[3].transform.position.z);
+                }
+                else if (academy.resetParameters["walls"] == 1)
+                {
+                    obstacles[3].transform.position = new Vector3(obstacles[3].transform.position.x, obstaclesStartPositionY + 5, obstacles[3].transform.position.z);
+                    obstacles[2].transform.position = new Vector3(obstacles[2].transform.position.x, obstaclesStartPositionY + 5, obstacles[2].transform.position.z);
+                }
+                else if (academy.resetParameters["walls"] == 2)
+                {
+                    obstacles[3].transform.position = new Vector3(obstacles[3].transform.position.x, obstaclesStartPositionY + 5, obstacles[3].transform.position.z);
+                    obstacles[2].transform.position = new Vector3(obstacles[2].transform.position.x, obstaclesStartPositionY + 5, obstacles[2].transform.position.z);
+                    obstacles[1].transform.position = new Vector3(obstacles[1].transform.position.x, obstaclesStartPositionY + 5, obstacles[1].transform.position.z);
+                }
+                else if (academy.resetParameters["walls"] == 3)
+                {
+                    obstacles[3].transform.position = new Vector3(obstacles[3].transform.position.x, obstaclesStartPositionY + 5, obstacles[3].transform.position.z);
+                    obstacles[2].transform.position = new Vector3(obstacles[2].transform.position.x, obstaclesStartPositionY + 5, obstacles[2].transform.position.z);
+                    obstacles[1].transform.position = new Vector3(obstacles[1].transform.position.x, obstaclesStartPositionY + 5, obstacles[1].transform.position.z);
+                    obstacles[0].transform.position = new Vector3(obstacles[0].transform.position.x, obstaclesStartPositionY + 5, obstacles[0].transform.position.z);
                 }
             }
 
-            if (changeFlag == 2 || changeFlag == 0)
+
+            if (mode == walkAndJumpModeWalker || mode == jumpMode)
             {
                 fences[0].transform.localScale = new Vector3(
                     fences[0].transform.localScale.x,
@@ -180,11 +290,11 @@ namespace Assets.Scripts
                     fences[0].transform.localScale.z);
             }
 
-            if(changeFlag != 5)
+            if(mode != fightMode)
             {
                 Target.position = new Vector3(targetPosition.x + rnd.Next(-4, 0), 0.5f, targetPosition.z + rnd.Next(-4, 0));
             }
-            if(changeFlag == 5)
+            if(mode == fightMode)
             {
                 previousAgentHp = 100;
                 previousEnemyHp = 100;
@@ -197,7 +307,7 @@ namespace Assets.Scripts
 
         public void AgentActionInDiffrentScenes(float[] vectorAction)
         {
-            if (changeFlag == 0)
+            if (mode == jumpMode)
             {
                 if (this.transform.position.z > fences[0].transform.position.z + 4)
                 {
@@ -206,7 +316,7 @@ namespace Assets.Scripts
                 }
             }
 
-            if (changeFlag == 1)
+            if (mode == walkMode)
             {
                 if (this.transform.position.z > obstacles[3].transform.position.z + 2)
                 {
@@ -215,49 +325,37 @@ namespace Assets.Scripts
                 }
             }
 
-
-            if (changeFlag == 2)
+            if (mode == walkAndJumpModeWalker)
             {
                 if (this.transform.position.z > obstacles[3].transform.position.z + 2)
                 {
                     AddReward(1.0f);
-                    changeFlag = 3;
+                    mode = walkAndJumpModeJumper;
                     GiveBrain(jumpBrain);
                 }
             }
 
-            if (changeFlag == 3)
+            if (mode == walkAndJumpModeJumper)
             {
                 if (this.transform.position.z > fences[0].transform.position.z + 4)
                 {
                     AddReward(1.0f);
                     GiveBrain(walkBrain);
-                    changeFlag = 2;
+                    mode = walkAndJumpModeWalker;
                     Done();
                 }
             }
 
-            if (changeFlag == 4)
+            if (mode == fightMode)
             {
-                if (this.transform.position.z > fences[0].transform.position.z + 4)
-                {
-                    AddReward(1.0f);
-                    changeFlag = -1;
-                    GiveBrain(walkBrain);
-                    Done();
-                }
-            }
-
-            if (changeFlag == 5)
-            {
-                if (vectorAction[3] > 0)
+                if (vectorAction[4] > 0)
                     afc.Block();
 
-                if (vectorAction[2] > 0.5)
+                if (vectorAction[3] > 0.5)
                 {
                     afc.LightAttack();
                 }
-                else if (vectorAction[2] < -0.5)
+                else if (vectorAction[3] < -0.5)
                     afc.HeavyAttack();
 
                 if (previousAgentHp > mvC.stats.currentHp)
@@ -267,21 +365,11 @@ namespace Assets.Scripts
                 }
                 if (previousEnemyHp > tsc.currentHp)
                 {
-                    AddReward(0.01f * (previousEnemyHp - tsc.currentHp));
+                    AddReward(0.02f * (previousEnemyHp - tsc.currentHp));
                     previousEnemyHp = mvCEnemy.stats.currentHp;
                 }
 
-                if(!mvC.state.isAlive)
-                {
-                    AddReward(-1.0f);
-                    Done();
-                }
-
-                if (!mvCEnemy.state.isAlive)
-                {
-                    AddReward(1.0f);
-                    Done();
-                }
+                academy.resetAgents();
                 Target.position = mvCEnemy.transform.position;
             }
         }
@@ -291,6 +379,11 @@ namespace Assets.Scripts
             if (hit.gameObject.tag == "Wall")
             {
                 AddReward(-0.5f);               
+            }
+
+            if (hit.gameObject.tag == "Obstacle")
+            {
+                AddReward(-0.5f);
             }
         }
 
