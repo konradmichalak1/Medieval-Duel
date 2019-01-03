@@ -6,6 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Level 2 - Training.unity
-    guid: 03fd9e43bcd8224499ec22d07c423672
+    path: Assets/Scenes/Menu.unity
+    guid: bf072cac33d675448a8b9e24b246cf32
+  - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+    guid: 2b5e56a8bb1df6949bd5880bb33cf649
+  - enabled: 1
+    path: Assets/Scenes/Level 7 - Fight.unity
+    guid: 8b4e922a3dd7fd04cb8a172894db3106
+  - enabled: 1
+    path: Assets/Scenes/Level 5 - TrainingWalk.unity
+    guid: 6207755fc951778419b0ca9d9f7f6271
+  - enabled: 1
+    path: Assets/Scenes/Level 4 - TrainingJump.unity
+    guid: 55b1fec0c78714842b4e1ddaa6546a83
+  - enabled: 1
+    path: Assets/Scenes/Level 6 - Walk&Jump.unity
+    guid: d3c047929a068f94e9bacc5af849425f
   m_configObjects: {}

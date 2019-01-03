@@ -60,43 +60,44 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ML-Agents\Scripts\Academy.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\ActionMasker.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\Agent.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\Batcher.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\BCTeacherHelper.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\Brain.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\Communicator.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\AgentActionProto.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\AgentInfoProto.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\BrainParametersProto.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\BrainTypeProto.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\CommandProto.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\EngineConfigurationProto.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\EnvironmentParametersProto.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\Header.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\ResolutionProto.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\SpaceTypeProto.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\UnityInput.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\UnityMessage.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\UnityOutput.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\UnityRlInitializationInput.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\UnityRlInitializationOutput.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\UnityRlInput.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\UnityRlOutput.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\UnityToExternal.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CommunicatorObjects\UnityToExternalGrpc.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CoreBrain.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CoreBrainExternal.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CoreBrainHeuristic.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CoreBrainInternal.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\CoreBrainPlayer.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\Decision.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\Monitor.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\ResetParameters.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\RpcCommunicator.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\SocketCommunicator.cs" />
-    <Compile Include="Assets\ML-Agents\Scripts\UnityAgentsException.cs" />
+    <Compile Include="Assets\MainMenu.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\Academy.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\ActionMasker.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\Agent.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\Batcher.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\BCTeacherHelper.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\Brain.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\Communicator.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\AgentActionProto.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\AgentInfoProto.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\BrainParametersProto.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\BrainTypeProto.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\CommandProto.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\EngineConfigurationProto.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\EnvironmentParametersProto.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\Header.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\ResolutionProto.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\SpaceTypeProto.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\UnityInput.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\UnityMessage.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\UnityOutput.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\UnityRlInitializationInput.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\UnityRlInitializationOutput.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\UnityRlInput.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\UnityRlOutput.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\UnityToExternal.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CommunicatorObjects\UnityToExternalGrpc.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CoreBrain.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CoreBrainExternal.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CoreBrainHeuristic.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CoreBrainInternal.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\CoreBrainPlayer.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\Decision.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\Monitor.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\ResetParameters.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\RpcCommunicator.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\SocketCommunicator.cs" />
+    <Compile Include="Assets\ML-Agents\ML-Agents\Scripts\UnityAgentsException.cs" />
     <Compile Include="Assets\Scripts\AgentScripts\RayPerception.cs" />
     <Compile Include="Assets\Scripts\AgentScripts\WarriorAcademy.cs" />
     <Compile Include="Assets\Scripts\EnemyScripts\AgentController.cs" />
@@ -322,22 +323,22 @@
       <HintPath>E:/Programy/Unity 2018/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics">
-      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/Plugins/System.Numerics.dll</HintPath>
+      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/ML-Agents/Plugins/System.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple">
-      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/Plugins/System.ValueTuple.dll</HintPath>
+      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/ML-Agents/Plugins/System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="TensorFlowSharp">
-      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/Plugins/Computer/TensorFlowSharp.dll</HintPath>
+      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/ML-Agents/Plugins/Computer/TensorFlowSharp.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf">
-      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/Plugins/ProtoBuffer/Google.Protobuf.dll</HintPath>
+      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/ML-Agents/Plugins/ProtoBuffer/Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="Grpc.Core">
-      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/Plugins/ProtoBuffer/Grpc.Core.dll</HintPath>
+      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/ML-Agents/Plugins/ProtoBuffer/Grpc.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Interactive.Async">
-      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/Plugins/ProtoBuffer/System.Interactive.Async.dll</HintPath>
+      <HintPath>C:/Users/Konrad/Documents/Visual Studio 2017/Projects/Medieval-Duel/Medieval Duel - prototype/Assets/ML-Agents/ML-Agents/Plugins/ProtoBuffer/System.Interactive.Async.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/Konrad/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>

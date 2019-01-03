@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Fence
   - Ground
+  - BackWall
+  - Obstacle
   layers:
   - Default
   - TransparentFX

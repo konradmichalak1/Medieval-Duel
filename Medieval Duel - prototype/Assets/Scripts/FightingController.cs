@@ -53,7 +53,6 @@ public abstract class FightingController : MonoBehaviour {
         // if inheriting object invokes block, doesn't running and doesn't attacking, then set its state to blocking
         if (isBlocking && !state.isImpact && stats.currentStamina > 0 && !state.isRunning && !state.isAttacking && !state.isRolling)
         {
-            Debug.Log("Blok");
             state.SetBlocking();
         }
         else
@@ -68,7 +67,6 @@ public abstract class FightingController : MonoBehaviour {
         //if inheriting object invokes light attack, and can attack
         if (isLightAttacking && CanAttack())
         {
-            Debug.Log("Lekki atak");
             actualDamage = lightAttackDamage ; //set light attack damage
             state.SetAttacking();
             state.lightAttack = true;
@@ -88,7 +86,6 @@ public abstract class FightingController : MonoBehaviour {
         //if inheriting object invokes light attack, and can attack
         if (isHeavyAttacking && CanAttack())
         {
-            Debug.Log("Ciężki atak");
             actualDamage = heavyAttackDamage; //set heavy attack damage
             state.SetAttacking();
             state.heavyAttack = true;
