@@ -112,6 +112,7 @@ public class MoveController : MonoBehaviour {
                 moveDirection.y = 0f;
                 if (action[3] > 0.5)
                 {
+                    
                     moveDirection.y = jumpForce;
                     stats.WasteStamina(25);
                 }

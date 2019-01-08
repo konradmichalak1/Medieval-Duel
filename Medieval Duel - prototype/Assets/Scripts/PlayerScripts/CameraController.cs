@@ -83,7 +83,7 @@ public class CameraController : MonoBehaviour {
 
         cam_x = Mathf.Clamp(cam_x, player.position.x - 2.5f, player.position.x + 2.5f);
         cam_z = Mathf.Clamp(cam_z, player.position.z - 2.5f, player.position.z + 2.5f);
-        Vector3 dir = new Vector3(cam_x, 2, cam_z);
+        Vector3 dir = new Vector3(cam_x, 4, cam_z);
         return dir;
     }
 }

@@ -28,4 +28,9 @@ public class MainMenu : MonoBehaviour {
     {
         SceneManager.LoadScene(5);
     }
+
+    public void Player()
+    {
+        SceneManager.LoadScene(6);
+    }
 }

@@ -513,6 +513,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114872728892970968, guid: eb67ba191f68e2246953cdec598e673a,
+        type: 2}
+      propertyPath: maxStaminaPoints
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb67ba191f68e2246953cdec598e673a, type: 2}
   m_IsPrefabAsset: 0

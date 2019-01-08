@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 6 - Walk&Jump.unity
     guid: d3c047929a068f94e9bacc5af849425f
+  - enabled: 1
+    path: Assets/Scenes/Level 0.unity
+    guid: f31dfa191afc076449709537725a5019
   m_configObjects: {}
